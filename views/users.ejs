@@ -1,0 +1,81 @@
+<%- include('partials/header') %>
+
+	<title>Portfolios</title>
+	<div class="container">
+		<br>
+		<h1 class="text-center">Portfolios</h1>
+		<div class="row">
+			<% for(var i= max-10; i<Users.length && i< max && Users[i].projects[0]; i++){%>
+				<div class="card col-sm-5" style="height: 900px;">
+					<img class="screenshot-portfolio img-circle" src="data:<%=Users[i].profilePicture.contentType%>;base64,<%=Users[i].profilePicture.photo%>"
+					/>
+					<h2 class="card-title" style="overflow-x: visible; overflow-y: hidden;">
+						<%= Users[i].name %>
+					</h2>
+
+					<p style="color: white">
+						Project 1<br>
+						<%= Users[i].projects[0].title%><br><br>
+							<%if(Users[i].projects[0].screenshot.photo){%>
+								<img class="screenshot" src="data:<%=Users[i].projects[0].screenshot.contentType%>;base64,<%=Users[i].projects[0].screenshot.photo%>"
+								/>
+								<%}%>
+									<%if(!Users[i].projects[0].screenshot.photo){%>
+										<img class="screenshot" src="https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg" />
+										<%}%>
+										<br><br>
+											<%if(Users[i].projects[0].URL){%>
+												<a href="<%= Users[i].projects[0].URL %>" class="btn btn-primary card-link-portfolio">Link</a>
+												<%}%>
+<% if(Users[i].projects[1]){%>
+<br><br><br>
+Project 2<br>
+						<%= Users[i].projects[1].title%><br><br>
+							<%if(Users[i].projects[1].screenshot.photo){%>
+								<img class="screenshot" src="data:<%=Users[i].projects[1].screenshot.contentType%>;base64,<%=Users[i].projects[1].screenshot.photo%>"
+								/>
+								<%}%>
+									<%if(!Users[i].projects[1].screenshot.photo){%>
+										<img class="screenshot" src="https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg" />
+										<%}%>
+										<br><br>
+											<%if(Users[i].projects[1].URL){%>
+												<a href="<%= Users[i].projects[1].URL %>" class="btn btn-primary card-link-portfolio">Link</a>
+												<%}%>
+
+					<%}%>
+					</p>
+				</div>
+				<% } %>
+		</div>
+
+		<% if(Users.length === 0) { %>
+			<br><br><br><br>
+			<h2 class="text-center">No portfolios available right now.</h2>
+			<% } %>
+
+				<div class="text-center">
+					<ul class="pagination">
+						<% for(var i=0; i<Users.length; i++ ){%>
+
+							<%if(
+						i+1 < (Users.length/10)+1 && i+1===max/10){%>
+								<li class="active">
+									<a href="/app/profiles/<%=i+1%>">
+										<%=i+1%>
+									</a>
+								</li>
+								<%}%>
+									<%if(i+1 < (Users.length/10)+1 && !
+						(i+1 === max/10)){%>
+										<li>
+											<a href="/app/profiles/<%=i+1%>">
+												<%=i+1%>
+											</a>
+										</li>
+										<%}%>
+											<%}%>
+					</ul>
+				</div>
+	</div>
+	<%- include('partials/footer') %>

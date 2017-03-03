@@ -1,0 +1,45 @@
+<%- include('partials/header') %>
+    <title>Create Portfolio</title>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <h1 class="text-center"> Create Portfolio</h1>
+                <% if(locals.error) { %>
+                    <div class="alert alert-danger fade in">
+                        <%= error %>
+                    </div>
+                    <% } %>
+                        <% if(locals.success) { %>
+                            <div class="alert alert-success fade in">
+                                <%= success %>
+                            </div>
+                            <% } %>
+                                <form enctype="multipart/form-data" action="/app/createPortfolio" method="post">
+                                    <div class="form-group text-center">
+                                        <% if(locals.filePath) { %>
+                                            <img class="profile-pic img-circle" src=<%=filePath %> alt="Profile Picture">
+                                            <% } %>
+                                                <% if(!locals.filePath) { %>
+                                                    <img src="/images/user.png" class="profile-pic img-circle" alt="Profile Picture">
+                                                    <% } %>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="file">Profile Picture</label>
+                                        <input type="file" name="myfile" /> <span class="hint">Supported files: jpg, jpeg, png.</span>
+                                        <br><br>
+                                        <input class="btn btn-default" type="submit" value="Upload Image" name="submit"><br/><br/>
+                                    </div>
+                                </form>
+                                <form action="/app/createPortfolio/upload" method="post">
+                                    <div class="form-group">
+                                        <label for="name">Name</label>
+                                        <input type="text" name="name" class="form-control" placeholder="Name" required/>
+                                    </div>
+                                    <div class="form-group text-center">
+                                        <button type="submit" class="btn btn-success">Create</button>
+                                    </div>
+                                </form>
+            </div>
+        </div>
+    </div>
+    <%- include('partials/footer') %>
